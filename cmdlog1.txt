@@ -1,0 +1,50 @@
+python manage.py migrate
+python manage.py makemigrations
+python manage.py showmigrations
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+python manage.py makemigrations
+python
+set DJANGO_SETTINGS_MODULE=survey.settings
+django-admin runserver
+set DJANGO_SETTINGS_MODULE=mysite.settings
+django-admin runserver
+cd ..
+set DJANGO_SETTINGS_MODULE=survey.settings
+django-admin runserver
+cd survey
+django-admin runserver
+python manage.py makemigrations
+python manage.py runserver
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+set DJANGO_SETTINGS_MODULE=survey.settings
+django-admin runserver
+python manage.py runserver
+django-admin runserver
+python manage.py runserver
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+python manage.py createsuperuser
+python
+python manage.py runserver
+django-admin runserver
+python manage.py runserver
+python manage.py shell
+python manage.py runserver
+python manage.py shell
+doskey /history
+python manage.py runserver
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+python manage.py shell
+pip install mysqlclient
+pip install pymysql
+python manage.py shell
+python manage.py runserver
+doskey /HISTROY > cmdlog.txt
+doskey /history > cmdlog1.txt
