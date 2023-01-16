@@ -1,0 +1,11 @@
+services:
+    api:
+        restart: unless-stopped
+        container_name: Rest-API
+        hostname: Rest-API
+        build: .
+        volumes:
+            - .:/app/
+        expose:
+            - 8000
+        command: "python manage.py"

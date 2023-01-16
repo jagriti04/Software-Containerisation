@@ -86,8 +86,9 @@ DATABASES = {
         'NAME': 'surveyapp',
         'USER': 'root',
         'PASSWORD': 'surveyapi123',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        # TODO we have to change this in the docker network stuff
+        'HOST': 'mysql',
+        'PORT': '65015',
     }
 }
 
