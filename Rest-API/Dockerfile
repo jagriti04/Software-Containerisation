@@ -12,3 +12,5 @@ RUN mkdir -p /Rest-API/
 COPY . /Rest-API/
 
 WORKDIR /Rest-API/
+
+RUN ["python", "manage.py"]

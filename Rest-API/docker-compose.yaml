@@ -1,51 +1,36 @@
-version: "3"
-services:
-    depl:
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: django-deployment
+spec:
+    replicas: 2
+    selector:
+        matchLabels:
+            app: django-app
+    template:
+        metadata:
+            labels:
+                app: django-app
+        spec:
+            containers:
+                - name: django
+                  image: rest-api:latest
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+    name: django-apache
+spec:
+    scaleTargetRef:
         apiVersion: apps/v1
         kind: Deployment
-        metadata:
-            name: django-deployment
-        spec:
-            replicas: 2
-            selector:
-                matchLabels:
-                    app: django-app
-            minReadySecons: 5
-            template:
-                metadata:
-                    labels:
-                        app: django-app
-                spec:
-                    containers:
-                        name: django
-                        hostname: Rest-API
-                        build: .
-                        volumes:
-                            - .:/app/
-                        ports:
-                            - containerPort: 8000
-                        command: "python manage.py"
-                        resources:
-                            limits:
-                                cpu: "1"
-                            requests:
-                                cpu: "0.25"
-    scale:
-        apiVersion: autoscaling/v2
-        kind: HorizontalPodAutoscaler
-        metadata:
-            name: django-apache
-        spec:
-            scaleTargetRef:
-                apiVersion: apps/v1
-                kind: Deployment
-                name: django-deployment
-            minReplicas: 2
-            maxReplicas: 5
-            metrics:
-                type: Resource
-                resource:
-                    name: cpu
-                    target:
-                        type: Utilization
-                        averageUtilization: 50
+        name: django-deployment
+    minReplicas: 2
+    maxReplicas: 5
+    metrics:
+    -   type: Resource
+        resource:
+            name: cpu
+            target:
+                type: Utilization
+                averageUtilization: 50
