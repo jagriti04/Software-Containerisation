@@ -17,7 +17,7 @@ from django.conf import settings
 @csrf_exempt
 @api_view(["GET"])
 def homePageView(request):
-    response = {"status": "Hello world", "message": "no rows found"}
+    response = {"status": "Hello world!", "message": "no rows found"}
     return HttpResponse(
         json.dumps(response), content_type="application/json", status=200
     )

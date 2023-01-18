@@ -25,3 +25,35 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Docker Configuration
+
+Steps to setup the containers:
+
+1. Navigate to the root folder of the repository, which looks like:
+```
+Project folder/
+---- Rest-API
+---- Frontend
+---- db
+---- ...
+```
+
+2. Once here, you can run the following commands:
+`docker-compose up -d --build`
+# -d is detached mode, so terminal doesn't get locked.
+
+3. For getting the backend working, you'll need to run migrations inside the container, you can open a bash terminal to the container by running
+
+`docker-compose exec <service-name> bash`
+e.g. docker-compose exec restapi bash
+
+Once inside there you can run the commands you usually would run.
+`python manage.py migrate`
+
+4. Then run `docker-compose ps` to make sure all three containers are up.
+
+5. To check on the browser -
+    For Restapis, go to - localhost:8000/survey/home, that should give a hello message.
+    For Database, make a curl request from terminal - `curl localhost:5432`, that should say 'empty server response'
+    For Frontend, go to - `localhost:4200` that should give the minimal UI we have 

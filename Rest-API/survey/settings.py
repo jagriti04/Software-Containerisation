@@ -57,7 +57,7 @@ ROOT_URLCONF = 'survey.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'], # added BASE_DIR / ... to have auto updates otherwise container needs to be restarted on every code change.
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
