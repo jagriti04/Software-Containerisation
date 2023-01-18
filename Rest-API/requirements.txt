@@ -1,11 +1,14 @@
-# MySQL Client - Used as an interface to connect Django application to the MySQL server.
-mysqlclient==2.1.1
+# # # MySQL Client - Used as an interface to connect Django application to the MySQL server.
+# # mysqlclient==2.1.1
 
-# Django Web Framework
-django==4.1.2
+# # Django Web Framework
+# django==4.1.2
 
 # Django Rest Framework - Used to design API logic
 djangorestframework==3.14.0
 
 # Django Cors Headers - Used to enable CORS headers in API responses, and allow requests to be made to your API server from other origins.
 django-cors-headers==3.13.0
+
+Django>=3.0,<4.0
+psycopg2>=2.8

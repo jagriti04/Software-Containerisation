@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,20 +77,31 @@ WSGI_APPLICATION = 'survey.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    
     # 'default': {
-    # # MySQL engine. Powered by the mysqlclient module.
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+
+    # 'default': {
+    #  # MySQL engine. Powered by the mysqlclient module.
     #     'ENGINE': 'django.db.backends.mysql',
     #     'NAME': 'surveyapp',
-    #     'USER': 'root',
-    #     'PASSWORD': 'surveyapi123',
+    #     'USER': os.environ.get('MYSQL_USER'),
+    #     'PASSWORD': os.environ.get('MYSQL_ROOT_PASSWORD'),
     #     # TODO we have to change this in the docker network stuff
-    #     'HOST': 'mysql',
-    #     'PORT': '65015',
+    #     'HOST': os.environ.get('MYSQL_HOST'),
+    #     'PORT': os.environ.get('MYSQL_PORT'),
     # }
+
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': 'db',
+        'PORT': 5432,
+    }
 }
 
 

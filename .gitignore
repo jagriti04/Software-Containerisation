@@ -1,0 +1,9 @@
+# cache should never be pushed since it can break other peoples devices or remote servers.
+# (not sure if it's even added to git)
+*cache*
+*/__pycache__/*
+
+# database folder should not be pushed, this doesn't belong in the cloud.
+data/db/*
+
+.bashrc
