@@ -1,16 +1,23 @@
-FROM python:latest
+# syntax=docker/dockerfile:1
+FROM python:3
 
-RUN python -m venv venv
-RUN /usr/local/bin/python - m pip install --upgrade pip
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-ADD requirement.txt /tmp/
+WORKDIR /code
 
-RUN pip install -r /tmp/requirement.txt
+# For Mysql
+# RUN apt-get update
+# RUN apt-get install python3-dev default-libmysqlclient-dev gcc  -y
+# RUN apt-get install mariadb-server -y
 
-RUN mkdir -p /Rest-API/
+# RUN apt-get update
+# RUN apt-get install python3-dev libpq-dev  -y
 
-COPY . /Rest-API/
+COPY requirements.txt requirements.txt
 
-WORKDIR /Rest-API/
+COPY .bashrc ~/.bashrc
 
-RUN ["python", "manage.py"]
+RUN pip install -r requirements.txt
+
+COPY . /code
