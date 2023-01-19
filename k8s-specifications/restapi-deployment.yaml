@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restapi
+  labels:
+    app: restapi
+spec:
+  selector:
+    matchLabels:
+      app: restapi
+  minReadySeconds: 5
+  template: 
+    metadata: 
+      labels:
+          app: restapi
+    spec:
+      containers:
+        - name: restapi
+          image: software-containerisation-restapi 
+          ports:
+            # - name: http
+              containerPort: 80
+              # protocol: TCP

@@ -26,7 +26,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+
+
+---------------------------------------------------
 ## Docker Configuration
+---------------------------------------------------
 
 Steps to setup the containers:
 
@@ -41,7 +45,7 @@ Project folder/
 
 2. Once here, you can run the following commands:
 `docker-compose up -d --build`
-# -d is detached mode, so terminal doesn't get locked.
+// -d is detached mode, so terminal doesn't get locked.
 
 3. For getting the backend working, you'll need to run migrations inside the container, you can open a bash terminal to the container by running
 

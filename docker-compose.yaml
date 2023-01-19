@@ -14,20 +14,20 @@ services:
 
   frontend:
     build:
-      context: ./Frontend
+      context: ./frontend
       target: builder
     ports:
       - 4200:4200
     volumes:
-      - ./Frontend:/project
+      - ./frontend:/project
       - /project/node_modules
 
-  rest-api:
+  restapi:
     build: 
-      context: ./Rest-API
+      context: ./restapi
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./Rest-API:/code
+      - ./restapi:/code
     ports:
       - "8000:8000"
     environment:
