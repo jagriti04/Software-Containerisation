@@ -37,8 +37,9 @@ export class AppComponent implements OnDestroy {
     }
     
     getAllUsers() {
-      this.appService.getUsers().pipe(takeUntil(this.destroy$)).subscribe((users: any) => {
-          this.users = users;
+      this.appService.getUsers().pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+          this.users = data.users;
+          console.log(this.users);
       });
     }
   
