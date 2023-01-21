@@ -64,7 +64,7 @@ def create_survey_user(request):
     """
     try:
         request_body = json.loads(request.body.decode("utf-8"))
-        username = request_body["username"]
+        username = request_body["userName"]
         name = request_body["name"]
         try:
             SurveyUser.objects.get(Q(username=username))

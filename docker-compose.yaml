@@ -6,7 +6,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - nginx_network
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
@@ -25,16 +27,37 @@ services:
   restapi:
     build: 
       context: ./restapi
-    command: python manage.py runserver 0.0.0.0:8000
+    # command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn survey.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - ./restapi:/code
     ports:
       - "8000:8000"
+    # expose:
+    #   - 8000
+    networks:
+      - nginx_network
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
-  
 
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - 2000:80
+    networks:
+      - nginx_network
+    depends_on:
+      - restapi
+
+
+networks:
+  nginx_network: 
+    driver: bridge
+
+volumes:
+  postgres_data:  
