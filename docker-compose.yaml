@@ -15,12 +15,12 @@ services:
   frontend:
     build:
       context: ./frontend
-      target: builder
+      target: build
     ports:
       - 4200:4200
     volumes:
-      - ./frontend:/project
-      - /project/node_modules
+      - ./frontend:/app
+      - /app/node_modules
 
   restapi:
     build: 
