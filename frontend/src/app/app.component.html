@@ -8,12 +8,12 @@
       <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="form-group col-md-6">
-            <label for="exampleInputEmail1">Name</label>
+            <label for="exampleInputEmail1">Full Name &nbsp;&nbsp;&nbsp;</label>
             <input type="text" class="form-control" formControlName="name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="First Name">
           </div>
           <div class="form-group col-md-6">
-            <label for="exampleInputPassword1">Username</label>
-            <input type="text" class="form-control" formControlName="userName" id="exampleInputPassword1" placeholder="Last Name">
+            <label for="exampleInputPassword1">Username&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" class="form-control" formControlName="userName" id="exampleInputPassword1" placeholder="User Name">
           </div>
         </div>
         <button type="submit" [disabled]="!userForm.valid" class="btn btn-danger">Create</button>
