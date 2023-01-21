@@ -28,11 +28,15 @@ def users_list(request):
     # """
     # Gets a list of all users.
     # """
-    all_users = SurveyUser.objects.all().values_list("username", flat=True)     #fetch users and return usernames
+    all_users = SurveyUser.objects.all().values_list("username", "name")     #fetch users and return users
+
 
     if len(all_users) > 0:
-        keys = [str(x) for x in all_users]
-        response = {"status": "success", "username": keys}
+        user = []
+        for x in all_users:
+            u = {"username" : x[0], "name" : x[1]}
+            user.append(u)
+        response = {"status": "success", "users": user}
     else:
         response = {"status": "error", "message": "no rows found"}
     return HttpResponse(
@@ -64,8 +68,9 @@ def create_survey_user(request):
     """
     try:
         request_body = json.loads(request.body.decode("utf-8"))
-        username = request_body["userName"]
-        name = request_body["name"]
+        user = request_body["user"]
+        username = user["userName"]
+        name = user["name"]
         try:
             SurveyUser.objects.get(Q(username=username))
         except SurveyUser.DoesNotExist:
