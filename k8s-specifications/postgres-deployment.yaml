@@ -1,31 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: restapi-deployment
+  name: postgresdb-deployment
   labels:
-    app: restapi
+    app: postgresdb
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: restapi
+      app: postgresdb
   template: 
     metadata: 
       labels:
-          app: restapi
+          app: postgresdb
     spec:
       containers:
-        - name: restapi
-          image: restapi 
+      - name: db
+          image: postgres 
           ports:
-          - containerPort: 8000
+          - containerPort: 5432
           env:
           - name: POSTGRES_USER
             valueFrom:
               secretKeyRef:
                 name: postgresdb-secret
-                key: postgres-root-username
+                key: postgres-username
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: postgresdb-secret
-                key: postgres-root-password
+                key: postgres-password
