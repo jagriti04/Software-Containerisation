@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: postgres-service
 spec:
-  selecter:
+  selector:
     app: postgresdb
   ports:
     - protocol: TCP
