@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: survey-ingress
+  # namespace: resource-ingress
+spec:
+  rules:
+  # specify the IP from hosts resulted by "kubectl get ingress -n survey-ingress --watch" 
+  # save it with this domain name in /etc/hosts
+  - host: surveyapp.com
+    http:
+      paths:
+      # Not sure whether this should be frontend or backend
+      - backend:
+          serviceName: frontend-service
+          # check the port number from terminal once service is created
+          servicePort: 80 
+  
+  tls:
+  - host: 
+  - surveyapp.com
+  secretName: survey-secret-tls
