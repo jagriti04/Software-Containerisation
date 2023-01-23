@@ -7,13 +7,17 @@ import { SurveyCompComponent } from './survey-comp/survey-comp.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddSurveyComponent } from './add-survey/add-survey.component';
+import { TakeSurveyComponent } from './take-survey/take-survey.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SurveyCompComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    AddSurveyComponent,
+    TakeSurveyComponent
   ],
   imports: [
     BrowserModule,
