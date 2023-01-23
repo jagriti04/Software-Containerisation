@@ -1,16 +1,18 @@
 INSTALLATION
-1. 'kubectl apply -f postgres-secrets.yaml' 
+1. 'kubectl apply -f postgres-secrets.yaml'  
 
-2. 'kubectl apply -f pv.yaml' 
+2. 'kubectl apply -f postgres-config.yaml' 
 
-3. 'kubectl apply -f pvc.yaml' 
+3. 'kubectl apply -f pv.yaml' 
 
-4. 'kubectl apply -f postgres-deployment.yaml' 
+4. 'kubectl apply -f pvc.yaml' 
 
-5. 'kubectl apply -f postgres-service.yaml'
+5. 'kubectl apply -f postgres-deployment.yaml' 
+
+6. 'kubectl apply -f postgres-service.yaml'
 
 INTERACTION
-6. 'kubectl get service postgres'
+7. 'kubectl get service postgres'
 
 NAME       TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 
