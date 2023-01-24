@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: survey-ingress
@@ -16,7 +16,7 @@ spec:
           # check the port number from terminal once service is created
           servicePort: 80 
   
-  tls:
-  - host: 
-  - surveyapp.com
-  secretName: survey-secret-tls
+  # tls:
+  # - host: 
+  # - surveyapp.com
+  # secretName: survey-secret-tls
