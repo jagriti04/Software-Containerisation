@@ -30,7 +30,7 @@ services:
     build: 
       context: ./restapi
     # command: python manage.py runserver 0.0.0.0:8000
-    command: gunicorn survey.wsgi:application --bind 0.0.0.0:8000
+    # command: gunicorn survey.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - ./restapi:/code
     ports:
