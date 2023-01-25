@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: restapi-service
 spec:
-  selecter:
+  type: ClusterIP 
+  selector:
     app: restapi
   ports:
     - protocol: TCP
-      port: 8000
+      port: 6000
       targetPort: 8000
-      # nodePort: 30000

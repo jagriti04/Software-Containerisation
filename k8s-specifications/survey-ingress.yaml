@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: survey-ingress
@@ -10,13 +10,14 @@ spec:
   - host: surveyapp.com
     http:
       paths:
-      # Not sure whether this should be frontend or backend
-      - backend:
-          serviceName: frontend-service
-          # check the port number from terminal once service is created
-          servicePort: 80 
-  
-  tls:
-  - host: 
-  - surveyapp.com
-  secretName: survey-secret-tls
+      - path: /
+        pathType: Prefix  
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 8080
+  # tls:
+  # - host: 
+  # - surveyapp.com
+  # secretName: survey-secret-tls

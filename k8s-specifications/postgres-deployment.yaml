@@ -9,24 +9,24 @@ spec:
   selector:
     matchLabels:
       app: postgresdb
-  template: 
-    metadata: 
+  template:
+    metadata:
       labels:
-          app: postgresdb
+        app: postgresdb
     spec:
       containers:
       - name: db
-        image: postgres:latest 
-        ports:
-        - containerPort: 5432
-        env:
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: postgresdb-secret
-              key: postgres-username
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgresdb-secret
-              key: postgres-password
+          image: postgres 
+          ports:
+          - containerPort: 5432
+          env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgresdb-secret
+                key: postgres-username
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgresdb-secret
+                key: postgres-password
