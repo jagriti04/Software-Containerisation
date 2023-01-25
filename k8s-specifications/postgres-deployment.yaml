@@ -15,18 +15,29 @@ spec:
         app: postgresdb
     spec:
       containers:
-      - name: db
-          image: postgres 
+        - name: db
+          image: docker.io/library/postgres
+          imagePullPolicy: "IfNotPresent"
           ports:
-          - containerPort: 5432
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+               name: postgres-config
           env:
-          - name: POSTGRES_USER
-            valueFrom:
-              secretKeyRef:
-                name: postgresdb-secret
-                key: postgres-username
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgresdb-secret
-                key: postgres-password
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgresdb-secret
+                  key: postgres-username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresdb-secret
+                  key: postgres-password
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdb-storage
+      volumes:
+      - name: postgresdb-storage
+        persistentVolumeClaim: 
+          claimName: postgresdb-pv-claim
