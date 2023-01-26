@@ -15,6 +15,7 @@ services:
       - POSTGRES_PASSWORD=postgres
 
   frontend:
+    image: frontend
     build:
       context: ./frontend
       target: builder
@@ -25,10 +26,11 @@ services:
       - /project/node_modules
 
   restapi:
+    image: restapi
     build: 
       context: ./restapi
     # command: python manage.py runserver 0.0.0.0:8000
-    command: gunicorn survey.wsgi:application --bind 0.0.0.0:8000
+    # command: gunicorn survey.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - ./restapi:/code
     ports:
@@ -45,6 +47,7 @@ services:
       - db
 
   nginx:
+    image: nginx
     build:
       context: ./nginx
     ports:
@@ -53,7 +56,6 @@ services:
       - nginx_network
     depends_on:
       - restapi
-
 
 networks:
   nginx_network: 

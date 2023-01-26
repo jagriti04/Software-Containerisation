@@ -1,67 +1,33 @@
-# apiVersion: v1
-# kind: Deployment
-# metadata:
-#   name: restapi
-#   labels:
-#     app: restapi
-# spec:
-#   selector:
-#     matchLabels:
-#       app: restapi
-#   minReadySeconds: 5
-#   template: 
-#     metadata: 
-#       labels:
-#           app: restapi
-#     spec:
-#       containers:
-#         - name: restapi
-#           image: screstapi:registry 
-#           ports:
-#             # - name: http
-#               containerPort: 80
-#               # protocol: TCP
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "1"
-  creationTimestamp: "2023-01-19T16:48:11Z"
-  generation: 1
+  name: restapi-deployment
   labels:
-    app: screstapideploy
-  name: screstapideploy
-  namespace: default
-  resourceVersion: "310426"
-  selfLink: /apis/apps/v1/namespaces/default/deployments/screstapideploy
-  uid: 15a3f2b1-230b-4a52-9f27-177372d89a8b
+    app: restapi
 spec:
-  progressDeadlineSeconds: 600
   replicas: 1
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: screstapideploy
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
-  template:
-    metadata:
-      creationTimestamp: null
+      app: restapi
+  template: 
+    metadata: 
       labels:
-        app: screstapideploy
+        app: restapi
     spec:
       containers:
-      - image: screstapi
-        imagePullPolicy: Always
-        name: screstapi
+      - name: restapi
+        image: restapi 
+        imagePullPolicy: Never
         ports:
-          containerPort: 80
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
+        - containerPort: 8000
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgresdb-secret
+              key: postgres-username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgresdb-secret
+              key: postgres-password
