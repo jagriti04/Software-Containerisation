@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: restapi
-          image: restapi 
+          image: restapi
           imagePullPolicy: Never
           ports:
           - containerPort: 8000

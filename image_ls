@@ -1,0 +1,3 @@
+REF
+localhost:32000/frontend-ui:registry
+localhost:32000/frontend-ui@sha256:a7de11c1c6e59cf0bcff7a006691c0020080ac686c307285c6e1a818b2226c68
