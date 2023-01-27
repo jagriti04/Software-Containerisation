@@ -5,28 +5,29 @@ metadata:
   labels:
     app: restapi
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: restapi
   template: 
     metadata: 
       labels:
-          app: restapi
+        app: restapi
     spec:
       containers:
-        - name: restapi
-          image: restapi
-          imagePullPolicy: Never
-          ports:
-          - containerPort: 8000
-          env:
-          - name: POSTGRES_USER
-            valueFrom:
-              secretKeyRef:
-                name: postgresdb-secret
-                key: postgres-username
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgresdb-secret
-                key: postgres-password
+      - name: restapi
+        image: restapi 
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgresdb-secret
+              key: postgres-username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgresdb-secret
+              key: postgres-password
