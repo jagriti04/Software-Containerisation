@@ -4,20 +4,19 @@ metadata:
   name: frontend-deployment
   labels:
     app: frontend
-
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: frontend 
   template:
     metadata:
       labels:
-        app: frontend
+        app: frontend 
     spec:
       containers:
       - name: frontend
-        image: frontend
+        image: docker.io/library/frontend
         imagePullPolicy: Never
         ports:
         - containerPort: 4200
