@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: restapi
-        image: restapi 
+        image: docker.io/library/restapi 
         imagePullPolicy: Never
         ports:
         - containerPort: 8000
@@ -24,10 +24,10 @@ spec:
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: postgresdb-secret
+              name: postgres-secret
               key: postgres-username
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgresdb-secret
+              name: postgres-secret
               key: postgres-password

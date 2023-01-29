@@ -5,9 +5,9 @@ metadata:
 spec:
   # type: NodePort
   type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 4200
+    targetPort: 4200
   selector:
     app: frontend
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 4200

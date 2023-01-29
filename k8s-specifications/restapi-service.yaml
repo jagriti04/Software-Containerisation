@@ -8,5 +8,5 @@ spec:
     app: restapi
   ports:
     - protocol: TCP
-      port: 6000
+      port: 8000
       targetPort: 8000
