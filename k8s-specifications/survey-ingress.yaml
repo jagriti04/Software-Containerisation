@@ -4,9 +4,11 @@ metadata:
   name: survey-ingress
   # namespace: resource-ingress
 spec:
+  tls:
+  - hosts: 
+    - surveyapp.com
+    secretName: survey-secret-tls
   rules:
-  # specify the IP from hosts resulted by "kubectl get ingress -n survey-ingress --watch" 
-  # save it with this domain name in /etc/hosts
   - host: surveyapp.com
     http:
       paths:
@@ -17,18 +19,27 @@ spec:
             name: frontend-service
             port:
               number: 4200
-  - host: surveyapp.api.com   
-    http:   
-      paths:    
-      - path: /
+      - path: /survey
         pathType: Prefix  
         backend:
           service:
             name: restapi-service
             port:
               number: 8000
-  # tls:
-  # - host: 
-  # - surveyapp.com
-  # - surveyapp.api.com
-  # secretName: survey-secret-tls
+      - path: /admin
+        pathType: Prefix  
+        backend:
+          service:
+            name: restapi-service
+            port:
+              number: 8000
+  # - host: api.surveyapp.com   
+  #   http:   
+  #     paths:    
+  #     - path: /
+  #       pathType: Prefix  
+  #       backend:
+  #         service:
+  #           name: restapi-service
+  #           port:
+  #             number: 8000
