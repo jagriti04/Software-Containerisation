@@ -1,0 +1,64 @@
+replicaCount: 1
+
+imagePullPolicy: Never
+
+namespace: default
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+image:
+  repository: docker.io/library/
+  tag: latest
+
+frontend:
+  appName: frontend
+  deploymentName: frontend-deployment
+  serviceName: frontend-service
+  service:
+    type: LoadBalancer
+    port: 4200
+    targetPort: 4200
+  containerPort: 4200
+
+restapi:
+  appName: restapi
+  deploymentName: restapi-deployment
+  serviceName: restapi-service
+  service:
+    type: ClusterIP
+    port: 8000
+    targetPort: 8000
+  containerPort: 8000
+
+postgres:
+  appName: postgres
+  deploymentName: postgres-deployment
+  serviceName: postgres-service
+  configmapName: postgres-config
+  service:
+    type: NodePort
+    port: 5432
+    nodePort: 30001
+  containerName: db
+  containerPort: 5432
+
+persistentVolume:
+  name: postgres-pv-volume
+  claimName: postgres-pv-claim
+  storageClassName: manual
+  storage: 1Gi
+
+secret:
+  postgres:
+    name: postgres-secret
+  
+ingress:
+  name: survey-ingress
+  hosts: surveyapp.com
+  tls:
+    secretName: surveyapp-secret-tls
