@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ingress.name }}
+  # namespace: resource-ingress
+spec:
+  tls:
+  - hosts: 
+    - {{ .Values.ingress.hosts }}
+    secretName: {{ .Values.secret.tls.secretName }}
+  rules:
+  - host: {{ .Values.ingress.hosts }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix  
+        backend:
+          service:
+            name: {{ .Values.frontend.serviceName }}
+            port:
+              number: {{ .Values.frontend.service.port }}
+      - path: /survey
+        pathType: Prefix  
+        backend:
+          service:
+            name: {{ .Values.restapi.serviceName }}
+            port:
+              number: {{ .Values.restapi.service.port }}
+      - path: /admin
+        pathType: Prefix  
+        backend:
+          service:
+            name: {{ .Values.restapi.serviceName }}
+            port:
+              number: {{ .Values.restapi.service.port }}
+  # - host: api.surveyapp.com   
+  #   http:   
+  #     paths:    
+  #     - path: /
+  #       pathType: Prefix  
+  #       backend:
+  #         service:
+  #           name: restapi-service
+  #           port:
+  #             number: 8000
