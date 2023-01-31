@@ -1,0 +1,12 @@
+kind: NetworkPolicy
+spec:
+  podSelector:
+    matchLabels:
+      app: postgres
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: restapi
+          
+
