@@ -70,3 +70,4 @@ networkPolicyDb:
 
 networkPolicyNamespace:
   name: deny-from-other-namesapaces
+
