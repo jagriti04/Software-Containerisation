@@ -2,15 +2,15 @@ kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
   namespace: default
-  name: db-from-backend
+  name: {{ .Values.networkPolicyDb.name }}
 spec:
   podSelector:
     matchLabels:
-      app: postgres
+      app: {{ .Values.networkPolicyDb.app }}
   ingress:
   - from:
     - podSelector:
         matchLabels:
-          app: restapi
+          app: {{ .Values.networkPolicyDb.fromApp }}
           
 
