@@ -41,9 +41,9 @@ postgres:
   serviceName: postgres-service
   configmapName: postgres-config
   service:
-    type: NodePort
+    type: ClusterIP
     port: 5432
-    nodePort: 30001
+    targetPort: 5432
   containerName: db
   containerPort: 5432
 
