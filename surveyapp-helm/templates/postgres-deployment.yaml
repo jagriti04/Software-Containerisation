@@ -1,39 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.restapi.deploymentName }}
+  name: {{ .Values.postgres.deploymentName }}
   labels:
-    app: {{ .Values.restapi.appName }}
+    app: {{ .Values.postgres.appName }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Values.restapi.appName }}
-  template: 
-    metadata: 
+      app: {{ .Values.postgres.appName }}
+  template:
+    metadata:
       labels:
-        app: {{ .Values.restapi.appName }}
+        app: {{ .Values.postgres.appName }}
     spec:
       containers:
-      - name: {{ .Values.restapi.appName }}
-        image: "{{ .Values.image.repository }}{{ .Values.restapi.appName }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.imagePullPolicy }}
-        ports:
-        - containerPort: {{ .Values.restapi.containerPort }}
-        env:
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.secret.postgres.name }}
-              key: postgres-username
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.secret.postgres.name }}
-              key: postgres-password
-        - name: POSTGRES_NAME
-          value: {{ .Values.postgres.appName }}
-        - name: POSTGRES_HOST
-          value: {{ .Values.postgres.serviceName }}
-        - name: POSTGRES_PORT
-          value: "{{ .Values.postgres.service.nodePort }}"
+        - name: {{ .Values.postgres.containerName }}
+          image: "{{ .Values.image.repository }}{{ .Values.postgres.appName }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.postgres.containerPort }}
+          envFrom:
+            - configMapRef:
+               name: {{ .Values.postgres.configmapName }}
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.postgres.name }}
+                  key: postgres-password
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-storage
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim: 
+          claimName: {{ .Values.persistentVolume.claimName }}
