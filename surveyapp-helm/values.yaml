@@ -1,6 +1,6 @@
 replicaCount: 1
 
-imagePullPolicy: Never
+imagePullPolicy: IfNotPresent
 
 namespace: default
 
@@ -12,8 +12,8 @@ autoscaling:
   targetMemoryUtilizationPercentage: 50
 
 image:
-  repository: docker.io/library/
-  tag: latest
+  repository: eu.gcr.io/sc-project-32/
+  tag: 0.1.0
 
 frontend:
   appName: frontend
@@ -71,3 +71,8 @@ networkPolicyDb:
 networkPolicyNamespace:
   name: deny-from-other-namesapaces
 
+rbac:
+  users:
+    hugo: sc
+    sushmita: sushmita
+    jagriti: jagriti
