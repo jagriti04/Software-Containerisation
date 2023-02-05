@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.restapi.jobName }}
+  labels:
+    app: {{ .Values.restapi.appName }}
+spec:
+  template: 
+    spec:
+      containers:
+      - name: {{ .Values.restapi.appName }}
+        image: "{{ .Values.image.repository }}{{ .Values.restapi.appName }}:{{ .Values.image.tag }}"
+        command: ['python', 'manage.py', 'migrate']
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        ports:
+        - containerPort: {{ .Values.restapi.containerPort }}
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secret.postgres.name }}
+              key: postgres-username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-password
+      restartPolicy: Never
