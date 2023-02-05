@@ -12,8 +12,8 @@ autoscaling:
   targetMemoryUtilizationPercentage: 50
 
 image:
-  repository: eu.gcr.io/sc-project-32/
-  tag: 0.1.0
+  repository: europe-west4-docker.pkg.dev/sc-32-376820/survey-app/
+  tag: v6
 
 frontend:
   appName: frontend
@@ -28,6 +28,7 @@ frontend:
 restapi:
   appName: restapi
   deploymentName: restapi-deployment
+  jobName: restapi-job
   serviceName: restapi-service
   service:
     type: ClusterIP
@@ -41,11 +42,22 @@ postgres:
   serviceName: postgres-service
   configmapName: postgres-config
   service:
-    type: NodePort
+    type: ClusterIP
     port: 5432
-    nodePort: 30001
+    targetPort: 5432
   containerName: db
   containerPort: 5432
+# postgres:
+#   appName: postgres
+#   deploymentName: postgres-deployment
+#   serviceName: postgres-service
+#   configmapName: postgres-config
+#   service:
+#     type: NodePort
+#     port: 5432
+#     nodePort: 30001
+#   containerName: db
+#   containerPort: 5432
 
 persistentVolume:
   name: postgres-pv-volume
@@ -59,9 +71,14 @@ secret:
   
 ingress:
   name: survey-ingress
-  hosts: surveyapp.com
-  tls:
-    secretName: surveyapp-secret-tls
+  config: frontend-config
+  # hosts: surveyapp.com
+  # tls:
+  #   secretName: letsencrypt-ca
+ssl:
+  certificateName: letsencrypt-ca
+  clusterIssuer: letsencrypt-prod
+  commonName: surveyapp-32
 
 networkPolicyDb:
   name: db-from-backend
