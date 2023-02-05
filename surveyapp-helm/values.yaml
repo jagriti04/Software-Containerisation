@@ -71,4 +71,9 @@ networkPolicyDb:
 networkPolicyNamespace:
   name: deny-from-other-namesapaces
 
+rbac:
+  users:
+    hugo: sc
+    sushmita: sushmita
+    jagriti: jagriti
 
