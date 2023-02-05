@@ -2,19 +2,15 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .Values.ingress.name }}
-  annotations:
-    # kubernetes.io/ingress.class: "gce"
-    # kubernetes.io/ingress.allow-http: "true"
-    networking.gke.io/v1beta1.FrontendConfig: "{{ .Values.ingress.config }}"
-
+  # namespace: resource-ingress
 spec:
   tls:
-  - secretName: {{ .Values.ssl.certificateName }}
-    hosts: 
+  - hosts: 
     - {{ .Values.ingress.hosts }}
-   
+    secretName: {{ .Values.ingress.tls.secretName }}
   rules:
-  - http:
+  - host: {{ .Values.ingress.hosts }}
+    http:
       paths:
       - path: /
         pathType: Prefix  
@@ -37,4 +33,13 @@ spec:
             name: {{ .Values.restapi.serviceName }}
             port:
               number: {{ .Values.restapi.service.port }}
- 
+  # - host: api.surveyapp.com   
+  #   http:   
+  #     paths:    
+  #     - path: /
+  #       pathType: Prefix  
+  #       backend:
+  #         service:
+  #           name: restapi-service
+  #           port:
+  #             number: 8000

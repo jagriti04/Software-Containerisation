@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.restapi.deploymentName }}
+  labels:
+    app: {{ .Values.restapi.appName }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.restapi.appName }}
+  template: 
+    metadata: 
+      labels:
+        app: {{ .Values.restapi.appName }}
+    spec:
+      containers:
+      - name: {{ .Values.restapi.appName }}
+        image: "{{ .Values.image.repository }}{{ .Values.restapi.appName }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        ports:
+        - containerPort: {{ .Values.restapi.containerPort }}
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secret.postgres.name }}
+              key: postgres-username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-password
