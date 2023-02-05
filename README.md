@@ -57,10 +57,10 @@
 10. create gcp compatible helm chart<br />
     -> `helm package .\surveyapp-helm\`
 
-11. push compiled helm chart to gcp
+11. push compiled helm chart to gcp<br />
     -> `helm push surveyapp-helm-0.1.1.tgz oci://europe-west4-docker.pkg.dev/sc-32-376820/survey-app`
 
-12. run the helm chart
+12. run the helm chart<br />
     -> `helm install [release-name] oci://europe-west4-docker.pkg.dev/sc-32-376820/survey-app/surveyapp-helm --version 0.1.1`
 
 ---------------------------------------------------
