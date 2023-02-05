@@ -125,11 +125,12 @@ Once inside there you can run the commands you usually would run.
 11. migrate database to postgresql (inside pod terminal starts with #) <br />
     -> `python manage.py migrate`
 
+12. exit pod terminal <br />
+    -> Ctrl + P
+
 ---------------------------------------------------
 ## Operational
 ---------------------------------------------------
-12. exit pod terminal <br />
-    -> Ctrl + P
 
 13. check the port for the frontend <br />
     -> `kubectl get svc `(look for) <br />
