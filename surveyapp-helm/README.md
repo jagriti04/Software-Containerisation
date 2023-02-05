@@ -7,7 +7,7 @@
     `kubectl delete all --all -n default`
     also delete hpa, pv, pvc, secrets.
 
-    Or if helm is already installed do, `helm ls` then `helm uninstall/delete <release_id>`
+    Or if helm is already installed do, `helm ls` then `helm uninstall surveyapp-release`
 
 2. `kubectl helm install surveyapp-release surveyapp-helm/` 
     - the release name here is unique 

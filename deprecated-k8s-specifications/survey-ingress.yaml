@@ -4,10 +4,10 @@ metadata:
   name: survey-ingress
   # namespace: resource-ingress
 spec:
-  tls:
-  - hosts: 
-    - surveyapp.com
-    secretName: survey-secret-tls
+  # tls:
+  # - hosts: 
+  #   - surveyapp.com
+  #   secretName: survey-secret-tls
   rules:
   - host: surveyapp.com
     http:

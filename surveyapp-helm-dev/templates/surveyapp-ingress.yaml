@@ -2,12 +2,15 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .Values.ingress.name }}
-  # namespace: resource-ingress
+  namespace: default
+  # annotations:
+  #   networking.gke.io/v1beta1.FrontendConfig: "frontend-https-redirect"
+
 spec:
   tls:
   - hosts: 
     - {{ .Values.ingress.hosts }}
-    secretName: {{ .Values.ingress.tls.secretName }}
+  - secretName: {{ .Values.ingress.tls.secretName }}
   rules:
   - host: {{ .Values.ingress.hosts }}
     http:
@@ -33,13 +36,3 @@ spec:
             name: {{ .Values.restapi.serviceName }}
             port:
               number: {{ .Values.restapi.service.port }}
-  # - host: api.surveyapp.com   
-  #   http:   
-  #     paths:    
-  #     - path: /
-  #       pathType: Prefix  
-  #       backend:
-  #         service:
-  #           name: restapi-service
-  #           port:
-  #             number: 8000

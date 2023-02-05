@@ -1,0 +1,23 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  namespace: default
+  name: frontend-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: {{ .Values.restapi.deploymentName }}
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: {{ .Values.frontend.deploymentName }}
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: {{ .Values.frontend.deploymentName }}
+
+  policyTypes:
+  - Ingress
+  - Egress

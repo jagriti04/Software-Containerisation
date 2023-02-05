@@ -3,21 +3,21 @@ kind: Deployment
 metadata: 
   name: frontend-deployment
   labels:
-    app: frontend
+    app: frontend1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend 
+      app: frontend1
   template:
     metadata:
       labels:
-        app: frontend 
+        app: frontend1
     spec:
       containers:
       - name: frontend
-        image: docker.io/library/frontend
-        imagePullPolicy: Never
+        image: eu.gcr.io/sc-project-32/frontend:0.1.0
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 4200
         resources:
@@ -26,38 +26,31 @@ spec:
           requests:
             cpu: 200m
 
----
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: frontend-deployment
-  namespace: default
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: frontend-deployment
-  minReplicas: 1
-  maxReplicas: 3
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 50
-    type: Resource
-    resource:
-      name: memory
-      target:
-        type: AverageValue
-        averageValue: 50
-    # type: Pods
-    # pods:
-    #   metric:
-    #     name: cpu
-    #   target:
-    #     type: AverageValue
-    #     averageValue: 50
+# ---
+# apiVersion: autoscaling/v2
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: frontend-deployment
+#   namespace: default
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: frontend-deployment
+#   minReplicas: 1
+#   maxReplicas: 3
+#   metrics:
+#   - type: Resource
+#     resource:
+#       name: cpu
+#       target:
+#         type: Utilization
+#         averageUtilization: 50
+#     type: Resource
+#     resource:
+#       name: memory
+#       target:
+#         type: AverageValue
+#         averageValue: 50
   
   

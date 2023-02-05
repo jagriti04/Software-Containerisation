@@ -11,8 +11,8 @@ spec:
     storage: {{ .Values.persistentVolume.storage }}
   accessModes:
     - ReadWriteOnce
-  # hostPath:
-  #   path: "/mnt/data"
+  hostPath:
+    path: "/mnt/data"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

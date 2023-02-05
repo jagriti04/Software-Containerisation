@@ -10,4 +10,4 @@ spec:
     port: 4200
     targetPort: 4200
   selector:
-    app: frontend
+    app: frontend1
