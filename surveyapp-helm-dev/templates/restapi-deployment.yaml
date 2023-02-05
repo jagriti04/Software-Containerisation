@@ -29,5 +29,11 @@ spec:
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
+              name: {{ .Values.secret.postgres.name }}
               key: postgres-password
+        - name: POSTGRES_NAME
+          value: {{ .Values.postgres.appName }}
+        - name: POSTGRES_HOST
+          value: {{ .Values.postgres.serviceName }}
+        - name: POSTGRES_PORT
+          value: "{{ .Values.postgres.service.targetPort }}"
