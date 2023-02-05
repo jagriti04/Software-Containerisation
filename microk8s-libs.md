@@ -2,3 +2,5 @@
 2. "microk8s enable registry" 
 3. "mircok8s enable helm3"
 4. "microk8s enable rbac"
+5. "microk8s enable dashboard"
+6. "microk8s enable ingress"
