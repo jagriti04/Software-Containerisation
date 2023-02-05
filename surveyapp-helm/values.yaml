@@ -62,3 +62,12 @@ ingress:
   hosts: surveyapp.com
   tls:
     secretName: surveyapp-secret-tls
+
+networkPolicyDb:
+  name: db-from-backend
+  app: postgres
+  fromApp: restapi
+
+networkPolicyNamespace:
+  name: deny-from-other-namesapaces
+
